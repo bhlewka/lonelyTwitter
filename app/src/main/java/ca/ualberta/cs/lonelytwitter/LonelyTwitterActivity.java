@@ -63,9 +63,13 @@ public class LonelyTwitterActivity extends Activity {
 		clearButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
+				String text = bodyText.getText().toString();
 				setResult(RESULT_OK);
 				tweetList.clear();
-				deleteFile(FILENAME);  // TODO deprecate this button
+				// Need to put a thingy here
+				ElasticsearchTweetController.GetTweetsTask getTweetsTask = new ElasticsearchTweetController.GetTweetsTask();
+				getTweetsTask.execute(text);
+				//deleteFile(FILENAME);  // TODO deprecate this button
 				adapter.notifyDataSetChanged();
 			}
 		});
